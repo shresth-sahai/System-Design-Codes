@@ -1,0 +1,31 @@
+class TicTacToe {
+ 
+    public int []row;
+    public int []cols;
+    private int diagonal,antidiagonal;
+    public TicTacToe(int n) {
+        rows=new int[n];
+        cols=new int[n];
+    }
+    
+    public int move(int row, int col, int player) {
+       int toAdd=player==1?1:-1;
+        rows[row]+=toAdd;
+          cols[col]+=toAdd;
+        if(row==col) diagonal+=toAdd;
+        if(col== (cols.length-row-1)) antidiagoinal+=toAdd;
+        -
+        
+        
+        
+        
+        
+        -
+    }
+}
+
+/**
+ * Your TicTacToe object will be instantiated and called as such:
+ * TicTacToe obj = new TicTacToe(n);
+ * int param_1 = obj.move(row,col,player);
+ */
