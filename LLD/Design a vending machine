@@ -1,3 +1,22 @@
+Design a Vending Machine
+
+use cases/reqs-->
+1-- select item and get price
+2-- accept coins/bill
+3. dispense item purchased
+4. refund when cancelling the request 
+
+
+Possible exceptions-->
+---sold out
+---not fully paid
+--- not enough changes
+
+
+
+
+
+
 #include <bit/stdc++.h>
 using namespace std;
 class Inventory{
