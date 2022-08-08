@@ -1,0 +1,107 @@
+#include <bit/stdc++.h>
+using namespace std;
+class Inventory{
+    public:
+    map<string,int> atoc;
+    map<string,int> atop;
+};
+class MachineBank{
+    public:
+    int coins;
+    int notes;
+    MachineBank()
+    {
+        coins=0;
+        notes=0;
+    }
+};
+class currency
+{
+    public:
+    int coinval;
+    int noteval;
+    currency(){
+        this->coinval=1;
+        this->noteval=2;
+    }
+};
+class vendingMachineService{
+    public:
+    const int DEFAULT_COUNT=10;
+    int DEFAULT_COIN=1;
+    int DEFAULT_NOTE=2;
+    Inventory inv;
+    MachineBank bank;
+    currency currencyvalue;
+    vendingMachineService()
+    {
+        inv.atoc["b1"]=10;
+         inv.atoc["b2"]=10;
+          inv.atoc["b3"]=10;
+           inv.atoc["b4"]=10;
+            inv.atoc["b5"]=10;
+
+            inv.atop["b1"]=100;
+            inv.atop["b2"]=90;
+            inv.atop["b3"]=80;
+            inv.atop["b4"]=70;
+            inv.atop["b5"]=60;
+
+        bank.coins=100;
+        bank.notes=100;
+
+    }
+    void addProduct(string pro, int count)
+    {
+        if(inv.atoc[pro]+count>DEFAULT_COUNT)
+        {
+            cout<<"Sorry inventory Full"<<endl;
+            return;
+        }
+        inv.atoc[pro]+=count;
+        cout<<"YES product added"<<endl;
+        return;
+    }
+    void showPrice(string pro)
+    {
+        if(inv.atop.count(pro)==0)
+        {
+            cout<<"Product does not exist"<<endl;
+            return;
+
+        }
+        cout<<inv.atop[pro]<<endl;
+    }
+}
+bool canChange(int money)
+{
+    if(bank.coins*currencyvalue.coinval>=money) return true;
+    int reqNotes=money/currencyvalue.noteval;
+    int remains=money%currencyvalue.noteval;
+    if(reqNotes<=bank.notes and remains <=bank.coins) return true;
+    return false;
+}
+int createChange(int money)
+{
+
+
+
+
+
+}
+void buyProduct(string pro,int notes,int coins)
+{
+--> edge case 1--> wrong product
+--> edge case 2--> money lesser
+
+--> edge  case 3--- >change not present
+
+inv.atoc[prod]--;
+bank.coins+=coins;
+bank.notes+=notes;
+int change=createChange();
+bank.notes-=notes;
+bank.coins-=coins;
+return;
+
+}
