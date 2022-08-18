@@ -1,0 +1,238 @@
+Importing Libraries
+
+import java.time.LocalDateTime;
+
+import java.util.*;
+Enum BillingType
+
+enum BillingType {
+    BASE_CHARGE, ADDITIONAL_SERVICE, FINE, OTHER;
+
+}
+Enum BillingType
+
+enum BillingType {
+    BASE_CHARGE, ADDITIONAL_SERVICE, FINE, OTHER;
+
+}
+
+Enum VehicleCategory
+
+enum VehicleCategory {
+    CAR, TRUCK, BUS, SUV, VAN, MOTORCYCLE
+
+}
+Enum VehicleType
+
+enum VehicleType {
+    ACCIDENT, FUELING, CLEANING_SERVICE, OIL_CHANGE, REPAIR, OTHER
+
+}
+enum CarType
+
+enum CarType {
+    ECONOMY, COMPACT, STANDARD, PREMIUM, LUXURY
+}
+Class Movie:
+
+enum PaymentStatus {
+    UNPAID, PENDING, COMPLETED, CANCELLED, REFUNDED
+}
+Class Rental:
+
+class Rental {
+
+    public static void main(String args[]) {
+
+        Address address = new Address("street", "city", "state", "zipcode", "country");
+        Person p = new Person("Harsh", "h@g.com", "8758149799", address);
+        Member harsh = new Member("id", "password", p, AccountStatus.ACTIVE, 5);
+
+        Vehicle car = new Vehicle(1001, 4, "BMW", "sportz", LocalDateTime.now(), "none", VehicleCategory.CAR);
+        car.addLogs("Accident");
+
+        Vehicle mahindra = new Vehicle(1121, 6, "MAHINDRA", "XUV", LocalDateTime.now(), "none", VehicleCategory.SUV);
+
+        // System.out.println(VehicleInventory.getAllVehicles());
+
+        // testing search query
+        for (Vehicle x : VehicleInventory.getAllVehicles()) {
+            System.out.println(x.brand);
+        }
+
+    }
+}
+Class Address:
+
+class Address {
+    public Address(String street, String city, String state, String zipcode, String country) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.country = country;
+    }
+
+    public String street, city, state, zipcode, country;
+
+}
+Class Person:
+
+class Person {
+    public Person(String name, String email, String phone, Address address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public String name, email, phone;
+    public Address address;
+
+}
+Class Account:
+
+class Account {
+    public Account(String id, String password, Person person, AccountStatus status) {
+        this.id = id;
+        this.password = password;
+        this.person = person;
+        this.status = status;
+    }
+
+    public String id, password;
+    public Person person;
+    public AccountStatus status;
+
+    public void resetPassword() {
+        this.password = "";
+    }
+}
+
+Class Member:
+
+
+class Member extends Account {
+    public Member(String id, String password, Person person, AccountStatus status, int totalVehicles) {
+        super(id, password, person, status);
+        this.totalVehicles = totalVehicles;
+    }
+
+    public int totalVehicles = 0;
+
+}
+
+Class Receptionist:
+
+class Receptionist extends Account {
+
+    public LocalDateTime joiningDate;
+
+    public Receptionist(String id, String password, Person person, AccountStatus status) {
+        super(id, password, person, status);
+        this.joiningDate = LocalDateTime.now();
+
+    }
+
+}
+
+Class CarRentalSystem:
+
+class CarRentalSystem {
+    public String name;
+    public Address location;
+
+    CarRentalSystem(String name, Address address) {
+        this.name = name;
+        this.location = address;
+    }
+
+    public Address getLocation() {
+        return location;
+    }
+}
+
+Class Vehicle:
+
+
+class Vehicle {
+
+    public int licenceNumber, capacity;
+    public String model, brand;
+    public LocalDateTime manufacturingYear;
+    public ArrayList<String> logs = new ArrayList<String>();
+    public VehicleCategory category;
+
+    public Vehicle(int licenceNumber, int capacity, String brand, String model, LocalDateTime manufacturingYear,
+            String logs, VehicleCategory category) {
+        this.licenceNumber = licenceNumber;
+        this.capacity = capacity;
+        this.brand = brand;
+        this.model = model;
+        this.manufacturingYear = manufacturingYear;
+        this.logs.add(logs);
+        this.category = category;
+
+        VehicleInventory.addVehicle(category, this);
+    }
+
+    public void addLogs(String log) {
+        logs.add(log);
+    }
+
+    public ArrayList<String> getLogs() {
+        return logs;
+    }
+}
+
+
+Class VehicleInventory:
+
+class VehicleInventory {
+    public static HashMap<VehicleCategory, ArrayList<Vehicle>> inventory = new HashMap<VehicleCategory, ArrayList<Vehicle>>();
+    public static ArrayList<Vehicle> database = new ArrayList<Vehicle>();
+
+    public static void addVehicle(VehicleCategory category, Vehicle Vehicle) {
+        inventory.putIfAbsent(category, new ArrayList<Vehicle>());
+        inventory.get(category).add(Vehicle);
+        database.add(Vehicle);
+
+    }
+
+    public static ArrayList<Vehicle> getVehicleByCategory(VehicleCategory category) {
+        return inventory.get(category);
+    }
+
+    public static ArrayList<Vehicle> getAllVehicles() {
+        return database;
+    }
+}
+
+Class VehicleLog:
+
+
+class VehicleLog {
+
+    public String id, description, type;
+    public LocalDateTime creationDate;
+
+    public VehicleLog(String id, String description, String type, LocalDateTime creationDate) {
+        this.id = id;
+        this.description = description;
+        this.type = type;
+        this.creationDate = creationDate;
+    }
+
+    public void update(String id, String description, String type, LocalDateTime creationDate) {
+        this.id = id;
+        this.creationDate = creationDate;
+        this.description = description;
+        this.type = type;
+
+    }
+
+    public String searchByType(String type) {
+        return description;
+    }
+
+}
