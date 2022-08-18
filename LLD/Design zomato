@@ -1,0 +1,209 @@
+Importing Libraries
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+Class Zomato:
+
+class Zomato {
+    public static void main(String[] args) {
+
+    }
+}
+Enum OrderStatus
+
+enum OrderStatus {
+    ACTIVE, CLOSED, CANCELED,
+}
+Enum PaymentStatus
+
+enum PaymentStatus {
+    UNPAID, PENDING, COMPLETED, FILLED, DECLINED, CANCELLED
+}
+Enum PaymentMethod
+
+enum PaymentMethod {
+    CASH, UPI, CARD, NET_BANKING
+}
+Class Person:
+
+class Person {
+    public String name, email, phone;
+    public Address address;
+
+    public Person(String name, String email, String phone, Address address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
+}
+Class Address:
+
+class Address {
+    public String street, city, state, zipcode, country;
+
+    public Address(String street, String city, String state, String zipcode, String country) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.country = country;
+    }
+
+}
+Class Customer:
+
+class Customer extends Person {
+
+    public ArrayList<Order> orders;
+
+    Customer(String name, String email, String phone, Address address) {
+        super(name, email, phone, address);
+    }
+
+    public void addOrders(Order order) {
+        this.orders.add(order);
+    }
+
+    public Boolean receiveOrder(Order order) {
+        if (!orders.contains(order))
+            return false;
+
+        this.orders.remove((order));
+        return true;
+    }
+}
+Class DeliveryGuy:
+
+class DeliveryGuy extends Person {
+
+    public ArrayList<Order> deliveries;
+
+    DeliveryGuy(String name, String email, String phone, Address address) {
+        super(name, email, phone, address);
+    }
+
+    public void addDeliveries(Order order) {
+        this.deliveries.add(order);
+    }
+
+    public Boolean deliverItem(Order order) {
+        if (!deliveries.contains(order))
+            return false;
+        this.deliveries.remove(order);
+        return true;
+    }
+
+}
+Class Restaurant:
+
+class Restaurant {
+    public String name;
+    public ArrayList<Branch> branches;
+
+    Restaurant(String name, Branch initialBranch) {
+        this.name = name;
+        this.branches = new ArrayList<Branch>();
+        this.branches.add(initialBranch);
+    }
+
+    public void addBranch(Branch branch) {
+        this.branches.add(branch);
+    }
+}
+Class Branch:
+
+class Branch {
+    public Address address;
+    public String name;
+
+    public Branch(Address address, String name) {
+        this.address = address;
+        this.name = name;
+    }
+
+}
+Class Menu:
+
+class Menu {
+    public String menuId;
+    public ArrayList<FoodItem> menu = new ArrayList<FoodItem>();
+
+    Menu(String id) {
+        this.menuId = id;
+    }
+
+    public void addFood(FoodItem dish) {
+        this.menu.add(dish);
+    }
+}
+Class FoodItem:
+
+class FoodItem {
+
+    public String name, id;
+    public String description;
+    public int cost;
+
+    public FoodItem(String name, String id, String description, int cost) {
+        this.name = name;
+        this.id = id;
+        this.description = description;
+        this.cost = cost;
+    }
+
+    public void updatePrice(int cost) {
+        this.cost = cost;
+    }
+
+}
+Class Order:
+
+class Order {
+
+    public String orderId;
+    public Customer customer;
+    public DeliveryGuy delivery;
+    public LocalDateTime creationOrder;
+    public PaymentMethod billingMode;
+    public ArrayList<FoodItem> meal;
+
+    public Order(String orderId, Customer customer, DeliveryGuy delivery, LocalDateTime creationOrder,
+            PaymentMethod billingMode) {
+        this.orderId = orderId;
+        this.customer = customer;
+        this.delivery = delivery;
+        this.creationOrder = creationOrder;
+        this.billingMode = billingMode;
+        meal = new ArrayList<FoodItem>();
+    }
+
+    public void addMeal(FoodItem dish) {
+        meal.add(dish);
+    }
+
+}
+Class System:
+
+class System {
+    public HashMap<Customer, ArrayList<Order>> customerDB;
+    public HashMap<DeliveryGuy, ArrayList<Order>> deliveryDB;
+
+    public void addCustomerDetails(Customer user, Order order) {
+        customerDB.get(user).add(order);
+    }
+
+    public ArrayList<Order> getCustomerDetails(Customer customer) {
+        return customerDB.get(customer);
+    }
+
+    public void addDeliveryDetails(DeliveryGuy delivery, Order order) {
+        deliveryDB.get(delivery).add(order);
+    }
+
+    public ArrayList<Order> getDeliveryDetails(DeliveryGuy delivery) {
+        return deliveryDB.get(delivery);
+    }
+}
