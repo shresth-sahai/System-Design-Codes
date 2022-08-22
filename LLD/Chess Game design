@@ -1,0 +1,90 @@
+public class Piece{
+    private boolean white;
+    private boolean killed=false;
+
+    public boolean canMove(Board board , Block startBlock,Block endBlock)
+    {
+        public Piece(boolean white)
+        {
+            this.white=white;
+        }
+        public boolean isWhite()
+        {
+            return white;
+        }
+        public boolean isKilled()
+        {
+            return killed;
+        }
+        public void setKilled(boolean killed)
+        {
+            this.killed=killed;
+        }
+    }
+    //class king
+    public class King extends Piece{
+        public King(boolean white)
+        {
+            super(white);
+        }
+        public boolean canMove(Board board , Block startBlock,Block endBlock)
+        {
+            return false;
+        }
+    }
+    //rook class
+    public class Rook extends Piece{
+        public Rook (boolean white)
+        {
+            super(white);
+        }
+        public boolean canMove(Board board, Block startBlock, Block endBlock)
+        {
+            return false;
+        }
+    }
+
+}
+
+
+// player class
+public class Player{
+    String name;
+
+    public Player(String name){
+        this.name=name;
+    }
+    public void join(Game g)
+    {
+
+
+
+
+    }
+}
+//class block
+public class Block{
+    private int x,y;
+    String label;
+    public Piece piece;
+    public Block(int x,int y,Piece piece)
+    {
+        this.x=x;
+        this.y=y;
+        this.label=assignLabel(x,y);
+        this.piece=piece;
+    }
+    public String assignLabel(int x,int y)
+    {
+        String [] xlabels={"1","2",};
+         String [] ylabels={"A","B",};
+         return xlabels[x]+ylabels[y];
+    }
+    public Piece getPiece{
+        return piece;
+    }
+    public void setPiece(Piece piece)
+    {
+        this.piece=piece;
+    }
+}
