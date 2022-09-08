@@ -1,0 +1,25 @@
+class H2O {
+  private Object lock=new Object ();
+      private  int c=0;
+    public H2O() {
+      
+    }
+
+    public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
+		synchronized(lock){
+            while(c==2){
+                lock.wait();
+            }
+        }
+        // releaseHydrogen.run() outputs "H". Do not change or remove this line.
+        releaseHydrogen.run();
+        c++;
+        lock.notifyAll();
+    }
+
+    public void oxygen(Runnable releaseOxygen) throws InterruptedException {
+        
+        // releaseOxygen.run() outputs "O". Do not change or remove this line.
+		releaseOxygen.run();
+    }
+}
