@@ -1,0 +1,120 @@
+✅ 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭 𝐂𝐥𝐚𝐫𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬 - (3-5 𝐦𝐢𝐧)
+Ask clarifying questions to understand the problem and expectations of the interviewer.
+  𝐚) 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬
+   👉 Focussed use cases to cover (MVP)
+   👉 Use cases that will not be covered
+   👉 Who will use the system
+   👉 Total/Daily active users
+   👉 How the system will be used
+  𝐛) 𝐍𝐨𝐧 𝐅𝐮𝐧𝐜𝐭𝐢𝐨𝐧𝐚𝐥 𝐑𝐞𝐪𝐮𝐢𝐫𝐞𝐦𝐞𝐧𝐭𝐬
+   👉 Is the system Highly Available or Highly Consistent? CAP theorem?
+   👉 Does the system requires low latency?
+   👉 Does the system needs to be reliable?
+  
+✅ 𝐄𝐬𝐭𝐢𝐦𝐚𝐭𝐢𝐨𝐧𝐬 (3-5 𝐦𝐢𝐧)
+   👉 Latency/Throughput expectations
+   👉 QPS (Queries Per Second) Read/Write ratio
+   👉 Traffic estimates
+   👉 Storage estimates
+   👉 Memory estimates
+
+✅ 𝐀𝐏𝐈 𝐃𝐞𝐬𝐢𝐠𝐧 (3-5 𝐦𝐢𝐧)
+   👉 Outline the different APIs for required scenarios
+ 
+✅ 𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞 𝐒𝐜𝐡𝐞𝐦𝐚 𝐃𝐞𝐬𝐢𝐠𝐧 (3-5 𝐦𝐢𝐧)
+    👉 Identify the type of database (SQL or NoSQL)
+    👉 Design schema like tables/columns and relationships with other tables (SQL)
+
+✅ 𝐒𝐲𝐬𝐭𝐞𝐦'𝐬 𝐃𝐞𝐭𝐚𝐢𝐥𝐞𝐝 𝐃𝐞𝐬𝐢𝐠𝐧 (20 - 25 𝐦𝐢𝐧)
+(a) Draw/Explain high-level components of the system involving below (if required) components -
+   👉 Client (Mobile, Browser)
+   👉 DNS
+   👉 CDN
+   👉 Load Balancers
+   👉 Web / Application Servers
+   👉 Microservices involved in fulfilling the design
+   👉 Blob / Object Storage
+   👉 Proxy/Reverse Proxy
+   👉 Database (SQL or NoSQL)
+   👉 Cache at various levels (Client side, CDN, Server side, Database side, Application level caching)
+   👉 Messaging Queues for asynchronous communication
+
+ (b) Identification of algorithm/data structures and way to scale them
+ (c) Scaling individual components - Horizontal & Vertical Scaling
+ (d) Database Partitioning - 
+     i) Methods
+        👉 Horizontal Partitioning
+        👉 Vertical Partitioning
+        👉 Directory-Based Partitioning
+    ii) Criteria    
+        👉 Range-Based Partitioning
+        👉 Hash-Based Partitioning (Consistent Hashing) (Data Sharding)
+        👉 Round Robin
+ (e) Replication & Redundancy -
+    👉 Redundancy - Primary and Secondary Server
+    👉 Replication - Data replication from active to mirrored node/database     
+ (f) Databases
+    👉 SQL - Sharding, Indexes, master-slave, master-master, Denormalization
+    👉 NoSQL - Key-Value, Document, Wide-Column, Graph
+
+q1 :  -->  URL shortening service
+Goal--> shortening service (long url---> short url)
+
+functional req-->
+1-->shorten the given url
+2--> short link should go to the orignal link
+3--> shorten url should have customization as per user
+
+non functional req---
+1--> available 
+2-->Consistent
+3--> min latency 
+
+capacity --->
+ 500 M new url per month
+ Read:write ---> 100:1
+ we can expect 50 billion redirections
+ query per seconds= 500 m/30*24*3600= 200 url/seconds
+ url redirections -- > 100*200= 20k/s
+
+ storage -->10 yrs(short +long)urls
+ total ursl=500 * 10*12=60 billion urls *2 ---> x 
+
+ url length ---> 120 bytes + 80 bytes---> total size acquired by each url
+ 200bytes *x=200x
+
+Api design---> rest api 
+
+endpoint--> POST
+ 1..create(long url,apikey,custom-url)
+2--Get api ---> retrieve(long url,apikey,custom-url)
+3---modify (long url,apikey,custom-url)
+
+database design--> mongodb is used 
+table---> user data 
+user id name email createdate 
+table --> shortlink data
+user id orignal url custom url
+
+algo used--- > SHA , MD5 
+
+scaling will be mix of vertical n Horizontal
+
+kafka / rabbit mq --- asynchronous communication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
